@@ -21,7 +21,17 @@ O sistema possui as seguintes entidades:
 - **Usuário** → nome e senha
 - **Log de Ações** → registro de alterações no sistema com data e hora
 
-## 🚀 Como Rodar o Projeto
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/GabrielBeledeli/Projeto-BackEnd-Laravel-PneusMax.git
+## 🧠 Autores
+
+- **Gabriel Beledeli Hul**
+- **Caio Eduardo Gemin Guarienti**
+- **Alisson Eraldo Da Silva**
+
+Engenharia de Software 4A  
+Centro Universitário Campo Real
+
+> Projeto desenvolvido para fins acadêmicos e aprendizado.
+
+---
+
+**Sinta-se à vontade para explorar, testar e adaptar o PneusMAX!** 🚗🛞
