@@ -7,14 +7,14 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
 
-class EspecificacaoSeeder extends Seeder
+class especificacoesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('especificacao')->insert([
+        DB::table('especificacoes')->insert([
             ['largura'=>235, 'perfil'=>'60%', 'indice_peso'=>'100 - 800 kg', 'indice_velocidade'=>'H - 210 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Assimétrico'],
             ['largura'=>195, 'perfil'=>'55%', 'indice_peso'=>'87 - 545 kg', 'indice_velocidade'=>'V - 240 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Simétrico'],
             ['largura'=>235, 'perfil'=>'60%', 'indice_peso'=>'100 - 800 Kg', 'indice_velocidade'=>'V - 240 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Assimétrico'],

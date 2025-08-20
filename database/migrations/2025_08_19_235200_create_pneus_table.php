@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('pneu', function (Blueprint $table) {
+        Schema::create('pneus', function (Blueprint $table) {
             $table->id('id_pneu');
             $table->string('marca', 50);
             $table->string('modelo', 100);
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_especificacao')->unique();
             $table->foreign('id_especificacao')
                   ->references('id_especificacao')
-                  ->on('especificacao')
+                  ->on('especificacoes')
                   ->restrictOnDelete();
         });
     }

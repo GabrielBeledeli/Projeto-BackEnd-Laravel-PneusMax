@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UsuarioSeeder::class,
-            EspecificacaoSeeder::class,
-            PneuSeeder::class,
-            LogAcaoSeeder::class,
+            usersSeeder::class,
+            especificacoesSeeder::class,
+            pneusSeeder::class,
+            log_acoesSeeder::class,
         ]);
 
         if (!User::where('email', 'test@example.com')->exists()) {

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('log_acao', function (Blueprint $table) {
+        Schema::create('log_acoes', function (Blueprint $table) {
             $table->id('id_log'); // BIGINT UNSIGNED
 
             // FK para pneu - relação 1:N
@@ -21,8 +21,8 @@ return new class extends Migration
             // FK para usuario - relação 1:N
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')
-                  ->references('id_usuario')
-                  ->on('usuario')
+                  ->references('id')
+                  ->on('users')
                   ->restrictOnDelete();
 
             $table->string('acao', 20);

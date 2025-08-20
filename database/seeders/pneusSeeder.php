@@ -7,14 +7,14 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
 
-class PneuSeeder extends Seeder
+class pneusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('pneu')->insert([
+        DB::table('pneus')->insert([
             ['marca'=>'Pirelli','modelo'=>'Scorpion Verde All Season','aro'=>16,'medida'=>'235/60R16','preco'=>699.90,'quantidade_estoque'=>10,'id_especificacao'=>1],
             ['marca'=>'Bridgestone','modelo'=>'Ecopia EP150','aro'=>16,'medida'=>'195/55R16','preco'=>689.90,'quantidade_estoque'=>20,'id_especificacao'=>2],
             ['marca'=>'Firestone','modelo'=>'Destination LE2','aro'=>16,'medida'=>'235/60R16','preco'=>829.90,'quantidade_estoque'=>15,'id_especificacao'=>3],
