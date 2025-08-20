@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pneu');
             $table->foreign('id_pneu')
                   ->references('id_pneu')
-                  ->on('pneu')
+                  ->on('pneus')
                   ->restrictOnDelete();
 
             // FK para usuario - relação 1:N
@@ -32,6 +32,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('log_acao');
+        Schema::dropIfExists('log_acoes');
     }
 };
