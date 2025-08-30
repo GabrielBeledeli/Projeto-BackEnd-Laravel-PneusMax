@@ -12,11 +12,11 @@ return new class extends Migration
             $table->id('id_especificacao');
             $table->integer('largura');
             $table->string('perfil', 10);
-            $table->string('indice_peso', 20)->default('Não Especificado');
-            $table->string('indice_velocidade', 20)->default('Não Especificado');
+            $table->string('indice_peso', 20)->default('NE');
+            $table->string('indice_velocidade', 20)->default('NE');
             $table->string('tipo_construcao', 20);
-            $table->string('tipo_terreno', 20)->default('Não Especificado');
-            $table->string('desenho', 20);
+            $table->string('tipo_terreno', 20)->default('NE');
+            $table->string('desenho', 20)->default('NE');
         });
     }
 

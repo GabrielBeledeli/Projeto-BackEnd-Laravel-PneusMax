@@ -18,7 +18,7 @@ class especificacoesSeeder extends Seeder
             ['largura'=>235, 'perfil'=>'60%', 'indice_peso'=>'100 - 800 kg', 'indice_velocidade'=>'H - 210 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Assimétrico'],
             ['largura'=>195, 'perfil'=>'55%', 'indice_peso'=>'87 - 545 kg', 'indice_velocidade'=>'V - 240 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Simétrico'],
             ['largura'=>235, 'perfil'=>'60%', 'indice_peso'=>'100 - 800 Kg', 'indice_velocidade'=>'V - 240 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Assimétrico'],
-            ['largura'=>195, 'perfil'=>'75%', 'indice_peso'=>'107 - 975 kg', 'indice_velocidade'=>'R - 170 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'Não Especificado', 'desenho'=>'Não Especificado'],
+            ['largura'=>195, 'perfil'=>'75%', 'indice_peso'=>'107 - 975 kg', 'indice_velocidade'=>'R - 170 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'NE', 'desenho'=>'NE'],
             ['largura'=>185, 'perfil'=>'60%', 'indice_peso'=>'82 - 475 kg', 'indice_velocidade'=>'H - 210 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Assimétrico'],
             ['largura'=>185, 'perfil'=>'65%', 'indice_peso'=>'88 - 560 kg', 'indice_velocidade'=>'H - 210 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Assimétrico'],
             ['largura'=>215, 'perfil'=>'60%', 'indice_peso'=>'96 - 710 kg', 'indice_velocidade'=>'H - 210 km/h', 'tipo_construcao'=>'Radial', 'tipo_terreno'=>'HT', 'desenho'=>'Simétrico'],

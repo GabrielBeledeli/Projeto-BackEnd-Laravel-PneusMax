@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+        /**
+     * Define o relacionamento: um Usuário TEM MUITOS Logs de Ações.
+     */
+    public function logAcoes()
+    {
+        // hasMany(ModelRelacionado, chave_estrangeira_na_outra_tabela, chave_local_nesta_tabela)
+        return $this->hasMany(Log_Acoes::class, 'id_usuario', 'id');
+    }
 }
