@@ -4,11 +4,18 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Estoque de Pneus') }}
             </h2>
-            <a href="{{ route('pneus.create') }}">
-                <x-primary-button>
-                    {{ __('Cadastrar Pneu') }}
-                </x-primary-button>
-            </a>
+            <div class="flex items-center space-x-4">
+                <a href="{{ route('log') }}">
+                    <x-secondary-button>
+                        {{ __('Log de Ações') }}
+                    </x-secondary-button>
+                </a>
+                <a href="{{ route('pneus.create') }}">
+                    <x-primary-button>
+                        {{ __('Cadastrar Pneu') }}
+                    </x-primary-button>
+                </a>
+            </div>
         </div>
     </x-slot>
 

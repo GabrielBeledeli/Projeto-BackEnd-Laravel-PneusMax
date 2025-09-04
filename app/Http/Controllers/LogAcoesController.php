@@ -12,7 +12,12 @@ class LogAcoesController extends Controller
      */
     public function index()
     {
-        //
+        $logs = Log_Acoes::with([
+            'pneu' => fn ($query) => $query->withTrashed(), 
+            'user'
+        ])->latest('data_hora')->get();
+        
+        return view('pneus.log', ['logs' => $logs]);
     }
 
     /**

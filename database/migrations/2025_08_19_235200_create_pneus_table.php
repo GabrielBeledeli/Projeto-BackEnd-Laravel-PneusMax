@@ -23,6 +23,7 @@ return new class extends Migration
                   ->references('id_especificacao')
                   ->on('especificacoes')
                   ->restrictOnDelete();
+            $table->softDeletes(); // Adiciona a coluna 'deleted_at' para o Soft Delete
         });
     }
 

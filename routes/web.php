@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PneusController;
+use App\Http\Controllers\LogAcoesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,6 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/edicao/{pneu}', [PneusController::class, 'edit'])->name('pneus.edit');
     Route::put('/edicao/{pneu}', [PneusController::class, 'update'])->name('pneus.update');
     Route::delete('/excluir/{pneu}', [PneusController::class, 'destroy'])->name('pneus.destroy');
+
+    // Rota para o Log de Ações
+    Route::get('/log', [LogAcoesController::class, 'index'])->name('log');
 });
 
 require __DIR__.'/auth.php';

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('tipo_construcao', 20);
             $table->string('tipo_terreno', 20)->default('NE');
             $table->string('desenho', 20)->default('NE');
+            $table->softDeletes(); // Adiciona a coluna 'deleted_at' para o Soft Delete
         });
     }
 
