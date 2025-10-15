@@ -2,7 +2,7 @@
 
 Este é o backend do sistema **PneusMax**, desenvolvido em **Laravel** para gerenciamento de pneus, especificações, usuários e registro de ações no sistema.
 
-## 📌 Funcionalidades
+## 📌 Funcionalidades Principais
 
 O sistema PneusMax oferece as seguintes funcionalidades:
 
@@ -22,6 +22,64 @@ O sistema PneusMax oferece as seguintes funcionalidades:
 -   **Registro de Ações (Logs):**
     -   Um sistema de log detalhado que registra todas as operações de criação, edição e exclusão de pneus, incluindo o usuário responsável e a data/hora da ação.
     -   Página dedicada para visualização do histórico completo de logs.
+ 
+ # 🧠 Padrões de Projeto Implementados
+
+Com o objetivo de tornar o código **mais modular, reutilizável e fácil de manter**, o projeto PneusMax aplica diversos **Design Patterns (Padrões de Projeto)** reconhecidos na engenharia de software:
+
+🔹 **Strategy Pattern — Sistema de Logs**
+
+**Implementação:**
+
+Interface: LogStrategyInterface
+
+Estratégias concretas implementam comportamentos distintos de registro de log, como gravação em banco, arquivo, ou console (facilitando extensões futuras).
+
+O Controller e demais classes dependem apenas da **interface**, não de implementações específicas.
+
+**Justificativa:**
+Esse padrão promove o **princípio do Aberto/Fechado (OCP)**, permitindo adicionar novas formas de registro sem alterar o código existente.
+Além disso, reduz o acoplamento entre o fluxo de negócio e a lógica de logging.
+
+🔹 **Factory Method — Criação de Pneus**
+
+**Implementação:**
+
+Interface: PneuFactoryInterface
+
+Implementação concreta responsável por instanciar e configurar objetos Pneu com suas dependências e dados validados.
+
+Utilizado no **controller de pneus** para remover lógica de criação repetitiva, delegando a responsabilidade para a **fábrica**.
+
+**Justificativa:**
+O uso do Factory Method torna o código do controller mais **enxuto e coeso**, seguindo o princípio da **Responsabilidade Única (SRP)**.
+Facilita ainda testes unitários e futuras modificações na forma de criação de pneus (por exemplo, criação em massa, importação de planilhas etc.).
+
+🔹 **Command Pattern — Criação de Pneus**
+
+**Implementação:**
+
+Classe: CreatePneusCommand
+
+Responsável por **encapsular toda a lógica de criação** de pneus em um único objeto de comando.
+
+O controller apenas dispara o comando, sem precisar conhecer os detalhes de como o pneu é persistido.
+
+**Justificativa:**
+O Command Pattern desacopla **o ato de executar uma ação** (como criar um pneu) da **forma como ela é realizada**.
+Isso facilita o reuso, logging, testes e eventuais filas de processamento assíncrono.
+
+🔹 **Query Object Pattern — Listagem de Pneus**
+
+**Implementação:**
+
+Classe: ListarPneusQuery
+
+Centraliza a lógica de listagem e filtragem de pneus, removendo consultas SQL/Eloquent diretas do controller.
+
+**Justificativa:**
+Garante **organização e reutilização de consultas complexas**, deixando o controller focado apenas na orquestração de requisições.
+Seguindo o princípio CQRS (Command Query Responsibility Segregation), separa comandos (ações) de consultas (leituras).
 
 ## 🛠️ Tecnologias Utilizadas
 
