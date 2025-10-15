@@ -10,9 +10,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Interfaces\PneuFactoryInterface;
+use App\Reports\Factories\PneuFactory;
+use App\Reports\Factories\LogFactory;
+use App\Services\Commands\CreatePneuCommand;
 
 class PneusController extends Controller
 {
+
+    protected CreatePneuCommand $createCommand;
+
+    /**
+     * Injeção de dependência do handler de criação.
+     */
+    public function __construct(CreatePneuCommand $createCommand)
+    {
+        $this->createCommand = $createCommand;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -32,45 +46,29 @@ class PneusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePneuRequest $request): RedirectResponse
-    {
-        $validatedData = $request->validated();
 
-        try {
-            DB::beginTransaction();
-            $especificacao = Especificacoes::create([
-                'largura' => $validatedData['largura'],
-                'perfil' => $validatedData['perfil'],
-                'indice_peso' => $validatedData['indice_peso'],
-                'indice_velocidade' => $validatedData['indice_velocidade'],
-                'tipo_construcao' => $validatedData['tipo_construcao'],
-                'tipo_terreno' => $validatedData['tipo_terreno'],
-                'desenho' => $validatedData['desenho'],
-            ]);
-            $pneu = Pneus::create([
-                'marca' => $validatedData['marca'],
-                'modelo' => $validatedData['modelo'],
-                'aro' => $validatedData['aro'],
-                'medida' => $validatedData['medida'],
-                'preco' => $validatedData['preco'],
-                'quantidade_estoque' => $validatedData['quantidade_estoque'],
-                'id_especificacao' => $especificacao->id_especificacao,
-            ]);
+    //Funcao refatorada
+public function store(StorePneuRequest $request): RedirectResponse
+{
+    $validatedData = $request->validated();
 
-            Log_Acoes::create([
-                'id_pneu' => $pneu->id_pneu,
-                'id_usuario' => Auth::id(),
-                'acao' => 'Criação',
-                'data_hora' => now(),
-            ]);
+    try {
+        DB::beginTransaction();
 
-            DB::commit();
-            return redirect()->route('dashboard')->with('success', 'Pneu cadastrado com sucesso!');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with('error', 'Ocorreu um erro ao cadastrar o pneu. Tente novamente.')->withInput();
-        }
+        // Usa o handler injetado
+        $pneu = $this->createCommand->execute($validatedData);
+
+        // Utilizando o padrão Strategy
+        $log = LogFactory::criar('criar');
+        $log->registrar($pneu);
+
+        DB::commit();
+        return redirect()->route('dashboard')->with('success', 'Pneu cadastrado com sucesso!');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->with('error', 'Ocorreu um erro ao cadastrar o pneu. Tente novamente.')->withInput();
     }
+}
 
     /**
      * Display the specified resource.
@@ -117,13 +115,9 @@ class PneusController extends Controller
             if ($pneu->especificacao) {
                 $pneu->especificacao->update($validatedData);
             }
-
-            Log_Acoes::create([
-                'id_pneu' => $pneu->id_pneu,
-                'id_usuario' => Auth::id(),
-                'acao' => 'Edição',
-                'data_hora' => now(),
-            ]);
+            //Utilizando o padrao Strategy 
+            $log = LogFactory::criar('editar');
+            $log->registrar($pneu);
 
             DB::commit();
 
@@ -150,12 +144,9 @@ class PneusController extends Controller
                 $pneu->especificacao->delete();
             }
 
-            Log_Acoes::create([
-                'id_pneu' => $pneu->id_pneu,
-                'id_usuario' => Auth::id(),
-                'acao' => 'Exclusão',
-                'data_hora' => now(),
-            ]);
+            //Utilizando o padrao Strategy 
+            $log = LogFactory::criar('excluir');
+            $log->registrar($pneu);
 
             DB::commit();
 

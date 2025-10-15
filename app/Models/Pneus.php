@@ -58,7 +58,6 @@ class Pneus extends Model
         'preco' => 'decimal:2', // Trata o preço como decimal com 2 casas
         'quantidade_estoque' => 'integer',
     ];
-
     /**
      * Define o relacionamento: um Pneu PERTENCE A uma Especificação.
      */
