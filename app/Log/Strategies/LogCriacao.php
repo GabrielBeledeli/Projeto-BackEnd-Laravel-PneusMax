@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Reports\Implementations;
+namespace App\Log\Strategies;
 
 use App\Models\Pneus;
 use App\Models\Log_Acoes;

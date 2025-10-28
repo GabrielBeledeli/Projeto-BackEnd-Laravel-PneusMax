@@ -14,6 +14,7 @@ use App\Interfaces\PneuFactoryInterface;
 use App\Reports\Factories\PneuFactory;
 use App\Reports\Factories\LogFactory;
 use App\Services\Commands\CreatePneuCommand;
+use App\Services\Queries\ListarPneusQuery;
 
 class PneusController extends Controller
 {
@@ -32,7 +33,10 @@ class PneusController extends Controller
      */
     public function index()
     {
-        //
+        //uso da query
+            $pneus = (new ListarPneusQuery())->execute();
+            return view('pneus.index', compact('pneus'));
+
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PneusController;
 use App\Http\Controllers\LogAcoesController;
-use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,7 +27,5 @@ Route::middleware('auth')->group(function () {
     // Rota para o Log de Ações
     Route::get('/log', [LogAcoesController::class, 'index'])->name('log');
 });
-
-
 
 require __DIR__.'/auth.php';

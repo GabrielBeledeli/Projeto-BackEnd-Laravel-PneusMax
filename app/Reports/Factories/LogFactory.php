@@ -3,9 +3,9 @@
 namespace App\Reports\Factories;
 
 use App\Interfaces\LogStrategyInterface;
-use App\Reports\Implementations\LogCriacao;
-use App\Reports\Implementations\LogEdicao;
-use App\Reports\Implementations\LogExclusao;
+use App\Log\Strategies\LogCriacao;
+use App\Log\Strategies\LogEdicao;
+use App\Log\Strategies\LogExclusao;
 
 class LogFactory {
     public static function criar(string $acao): LogStrategyInterface {
