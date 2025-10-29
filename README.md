@@ -32,8 +32,8 @@ Com o objetivo de tornar o código **mais modular, reutilizável e fácil de man
 **Implementação:**
 
 Interface: LogStrategyInterface
-Estratégias concretas: LogCriacao, LogEdicao, LogExclusao
-Contexto: LogContext
+- Estratégias concretas: LogCriacao, LogEdicao, LogExclusao
+- Contexto: LogContext
 
 O sistema de logs do PneusMax utiliza o padrão Strategy para registrar ações críticas realizadas sobre os pneus. Cada tipo de operação (criação, edição, exclusão) é encapsulada em uma estratégia de log específica, que implementa a interface LogStrategyInterface.
 A classe LogContext atua como orquestradora da estratégia atual, recebendo dinamicamente a estratégia apropriada e executando o método registrar() com base no pneu afetado.
