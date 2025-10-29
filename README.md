@@ -32,14 +32,16 @@ Com o objetivo de tornar o código **mais modular, reutilizável e fácil de man
 **Implementação:**
 
 Interface: LogStrategyInterface
+Estratégias concretas: LogCriacao, LogEdicao, LogExclusao
+Contexto: LogContext
 
-Estratégias concretas implementam comportamentos distintos de registro de log, como gravação em banco, arquivo, ou console (facilitando extensões futuras).
+O sistema de logs do PneusMax utiliza o padrão Strategy para registrar ações críticas realizadas sobre os pneus. Cada tipo de operação (criação, edição, exclusão) é encapsulada em uma estratégia de log específica, que implementa a interface LogStrategyInterface.
+A classe LogContext atua como orquestradora da estratégia atual, recebendo dinamicamente a estratégia apropriada e executando o método registrar() com base no pneu afetado.
 
-O Controller e demais classes dependem apenas da **interface**, não de implementações específicas.
+
 
 **Justificativa:**
-Esse padrão promove o **princípio do Aberto/Fechado (OCP)**, permitindo adicionar novas formas de registro sem alterar o código existente.
-Além disso, reduz o acoplamento entre o fluxo de negócio e a lógica de logging.
+Esse padrão promove o **princípio do Aberto/Fechado (OCP)**, permitindo adicionar novas formas de registro (como logs em arquivo, envio para sistemas externos, etc.) sem alterar o código existente. A separação entre o contexto (LogContext) e as estratégias (LogCriacao, LogEdicao, LogExclusao) garante baixo acoplamento, alta coesão e flexibilidade para testes e manutenção
 
 🔹 **Factory Method — Criação de Pneus**
 
@@ -68,6 +70,21 @@ O controller apenas dispara o comando, sem precisar conhecer os detalhes de como
 **Justificativa:**
 O Command Pattern desacopla **o ato de executar uma ação** (como criar um pneu) da **forma como ela é realizada**.
 Isso facilita o reuso, logging, testes e eventuais filas de processamento assíncrono.
+
+
+🔹 **Handler — Orquestração de Comandos**
+
+**Implementação:**
+
+Classe: CreatePneusCommandHandler
+Responsável por intermediar a execução do comando de criação de pneus, recebendo os dados validados do controller e repassando-os ao CreatePneusCommand.
+O handler atua como uma camada de orquestração, permitindo que futuras ações como validações adicionais, normalizações, logs ou disparo de eventos sejam centralizadas em um único ponto.
+
+**Justificativa:**
+
+O uso de um handler separa a intenção de executar uma ação (controller) da execução real (command), promovendo o princípio da Separação de Responsabilidades (SRP). Também facilita testes unitários e permite evoluções futuras sem alterar o controller.
+
+
 
 🔹 **Query Object Pattern — Listagem de Pneus**
 
