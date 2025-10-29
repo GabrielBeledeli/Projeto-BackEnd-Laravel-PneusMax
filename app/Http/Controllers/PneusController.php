@@ -4,30 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePneuRequest;
 use App\Models\Pneus;
-use App\Models\Especificacoes;
-use App\Models\Log_Acoes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use App\Interfaces\PneuFactoryInterface;
-use App\Reports\Factories\PneuFactory;
 use App\Reports\Factories\LogFactory;
-use App\Services\Commands\CreatePneuCommand;
 use App\Services\Queries\ListarPneusQuery;
+use App\Core\Products\Handlers\CreatePneusCommandHandler;
+
 
 class PneusController extends Controller
 {
 
-    protected CreatePneuCommand $createCommand;
+   protected CreatePneusCommandHandler $createHandler;
 
-    /**
+   /**
      * Injeção de dependência do handler de criação.
      */
-    public function __construct(CreatePneuCommand $createCommand)
-    {
-        $this->createCommand = $createCommand;
-    }
+public function __construct(CreatePneusCommandHandler $createHandler)
+{
+    $this->createHandler = $createHandler;
+}
     /**
      * Display a listing of the resource.
      */
@@ -60,7 +56,7 @@ public function store(StorePneuRequest $request): RedirectResponse
         DB::beginTransaction();
 
         // Usa o handler injetado
-        $pneu = $this->createCommand->execute($validatedData);
+        $pneu = $this->createHandler->handle($validatedData);
 
         // Utilizando o padrão Strategy
         $log = LogFactory::criar('criar');
@@ -73,6 +69,7 @@ public function store(StorePneuRequest $request): RedirectResponse
         return back()->with('error', 'Ocorreu um erro ao cadastrar o pneu. Tente novamente.')->withInput();
     }
 }
+
 
     /**
      * Display the specified resource.

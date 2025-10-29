@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Commands;
+namespace App\Core\Products\Commands;
 
 use App\Models\Pneus;
 use Illuminate\Support\Facades\DB;
